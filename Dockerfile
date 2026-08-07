@@ -1,20 +1,20 @@
 # Adapted from https://github.com/actions/runner/blob/main/images/Dockerfile
-FROM ubuntu:questing-20251217 AS build
+FROM ubuntu:questing-20260610 AS build
 
 ARG TARGETOS
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=actions/runner
-ARG RUNNER_VERSION=2.335.1
+ARG RUNNER_VERSION=2.336.0
 # update these together with RUNNER_VERSION from upstream
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.7.0
-ARG DOCKER_VERSION=29.3.1
-ARG BUILDX_VERSION=0.33.0
+ARG DOCKER_VERSION=29.7.1
+ARG BUILDX_VERSION=0.36.0
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.35.4
+ARG KUBECTL_VERSION=v1.36.3
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=v4.1.4
+ARG HELM_VERSION=v4.2.3
 # renovate: datasource=github-releases depName=sigstore/cosign
-ARG COSIGN_VERSION=v3.0.6
+ARG COSIGN_VERSION=v3.1.3
 
 RUN apt update -y && apt install curl git unzip -y
 
@@ -61,19 +61,19 @@ RUN curl -fLo cosign https://github.com/sigstore/cosign/releases/download/${COSI
     && chmod +x cosign \
     && mv cosign /tools/bin/
 
-FROM ubuntu:questing-20251217 AS actions-runner
+FROM ubuntu:questing-20260610 AS actions-runner
 
 ARG TARGETOS
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=google/go-containerregistry
-ARG CRANE_VERSION=v0.21.5
+ARG CRANE_VERSION=v0.21.9
 # renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=v4.52.5
+ARG YQ_VERSION=v4.53.3
 # renovate: datasource=github-releases depName=getsops/sops
-ARG SOPS_VERSION=v3.12.2
+ARG SOPS_VERSION=v3.13.3
 # renovate: datasource=github-tags depName=aws/aws-cli
-ARG AWSCLI_VERSION=2.34.30
+ARG AWSCLI_VERSION=2.36.18
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
 ARG KREW_VERSION=v0.5.0
 
